@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marc Márquez #93 | Ducati Lenovo Team Stats</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,900;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* CAMBIA ESTE COLOR SEGÚN EL PILOTO: Ducati (#ff3e3e), KTM (#ff6600), Yamaha (#0000ff) */
+            --team-color: #ff3e3e; 
+            --bg-white: #ffffff;
+            --text-main: #111111;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-white); color: var(--text-main); font-family: var(--font-body); }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1100px; height: 70px;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,1); border-radius: 50px;
+            display: flex; align-items: center; justify-content: space-between; padding: 0 40px; z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        /* --- HERO --- */
+        header { padding: 160px 20px 60px; text-align: center; position: relative; }
+        .rider-number-bg { 
+            position: absolute; top: 100px; left: 50%; transform: translateX(-50%);
+            font-family: var(--font-display); font-size: 15rem; font-weight: 900;
+            color: var(--team-color); opacity: 0.05; z-index: -1;
+        }
+        header h1 { font-family: var(--font-display); font-size: clamp(3rem, 10vw, 6rem); line-height: 0.8; }
+        header h1 span { color: var(--team-color); }
+
+        /* --- GRAPH SECTION (GLASSMorphism) --- */
+        .chart-card {
+            max-width: 1100px; margin: 0 auto 60px; padding: 40px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 60px; border: 1px solid #f0f0f0;
+            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.02);
+        }
+
+        .chart-info { display: flex; justify-content: space-between; margin-bottom: 20px; align-items: flex-end; }
+        .chart-info h3 { font-family: var(--font-display); font-size: 1.8rem; }
+        
+        .svg-container { width: 100%; height: 200px; position: relative; }
+        .svg-chart { width: 100%; height: 100%; overflow: visible; }
+        
+        /* Animación de la línea */
+        .line-path {
+            stroke: var(--team-color);
+            stroke-width: 5;
+            fill: none;
+            stroke-dasharray: 1200;
+            stroke-dashoffset: 1200;
+            animation: drawLine 3s forwards cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+        /* --- STATS GRID --- */
+        .stats-grid {
+            max-width: 1100px; margin: 40px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; padding: 0 20px;
+        }
+
+        .stat-bubble {
+            background: #fff; border: 1px solid #eee; border-radius: 50px;
+            padding: 45px 20px; text-align: center; transition: 0.4s ease;
+        }
+        .stat-bubble:hover { border-color: var(--team-color); transform: translateY(-10px); }
+        
+        .counter { font-family: var(--font-display); font-size: 3.5rem; font-weight: 900; color: var(--text-main); line-height: 1; }
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #999; font-weight: 700; margin-top: 10px; display: block; }
+
+        /* --- MAYORES DUELOS --- */
+        .duels-container { max-width: 1100px; margin: 100px auto; padding: 0 20px; }
+        .duels-container h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 40px; text-align: center; }
+
+        .duel-pill {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #111; color: white; border-radius: 100px;
+            padding: 20px 50px; margin-bottom: 15px; transition: 0.3s;
+        }
+        .duel-pill:hover { background: #000; transform: scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
+
+        .vs-box { display: flex; align-items: center; gap: 15px; font-weight: 700; }
+        .vs-tag { 
+            background: var(--team-color); color: white; padding: 4px 10px; 
+            border-radius: 10px; font-size: 0.6rem; font-style: italic;
+        }
+
+        .circuit-info { text-align: right; }
+        .circuit-info span { display: block; font-size: 0.6rem; text-transform: uppercase; opacity: 0.5; }
+        .circuit-info strong { font-family: var(--font-display); font-size: 1.2rem; color: var(--team-color); }
+
+        @media (max-width: 768px) {
+            .duel-pill { flex-direction: column; border-radius: 40px; text-align: center; gap: 15px; }
+            .circuit-info { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-logo" style="text-decoration:none; color:black; font-weight:900;">MOTO.STATS</a>
+        <div style="font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; color: var(--team-color);">#MM93 DUCATI</div>
+    </nav>
+
+    <header>
+        <div class="rider-number-bg">93</div>
+        <p style="letter-spacing: 5px; color: #999; font-size: 0.8rem; font-weight: 700;">DUCATI LENOVO TEAM</p>
+        <h1>Marc <span>Márquez</span></h1>
+    </header>
+
+    <div class="chart-card">
+        <div class="chart-info">
+            <div>
+                <h3>Rendimiento 2026</h3>
+                <p style="font-size: 0.8rem; color: #888;">Puntos acumulados por Gran Premio</p>
+            </div>
+            <div style="text-align:right">
+                <span style="font-size: 2rem; font-weight: 900; color: var(--team-color);">+124</span>
+                <p style="font-size: 0.6rem; font-weight: 700;">GAP VS P2</p>
+            </div>
+        </div>
+        <div class="svg-container">
+            <svg class="svg-chart" viewBox="0 0 1000 200">
+                <path d="M0,180 Q100,160 200,120 T400,140 T600,60 T800,80 T1000,20 L1000,200 L0,200 Z" 
+                      fill="var(--team-color)" opacity="0.05" />
+                <path class="line-path" d="M0,180 Q100,160 200,120 T400,140 T600,60 T800,80 T1000,20" />
+                <circle cx="1000" cy="20" r="8" fill="var(--team-color)" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-bubble">
+            <span class="counter" data-target="85">0</span>
+            <span class="stat-label">Victorias</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="1142">0</span>
+            <span class="stat-label">Vueltas Líder</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="425">0</span>
+            <span class="stat-label">Puntos Totales</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="8">0</span>
+            <span class="stat-label">Títulos Mundiales</span>
+        </div>
+    </div>
+
+    <div class="duels-container">
+        <h2>Mayores Duelos</h2>
+        
+        <div class="duel-pill">
+            <div class="vs-box">
+                M. MÁRQUEZ <span class="vs-tag">VS</span> P. BAGNAIA
+            </div>
+            <div class="circuit-info">
+                <span>Último enfrentamiento</span>
+                <strong>Mugello Circuit</strong>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 1.2rem;">+0.042s</div>
+        </div>
+
+        <div class="duel-pill">
+            <div class="vs-box">
+                M. MÁRQUEZ <span class="vs-tag">VS</span> J. MARTÍN
+            </div>
+            <div class="circuit-info">
+                <span>Batalla por la Pole</span>
+                <strong>Sachsenring</strong>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 1.2rem;">P1 LUCHA</div>
+        </div>
+
+        <div class="duel-pill">
+            <div class="vs-box">
+                M. MÁRQUEZ <span class="vs-tag">VS</span> P. ACOSTA
+            </div>
+            <div class="circuit-info">
+                <span>Adelantamiento Límite</span>
+                <strong>Circuit of the Americas</strong>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 1.2rem;">LAP 20</div>
+        </div>
+    </div>
+
+    <script>
+        // Lógica de Contadores Animados
+        const startCounters = () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const increment = target / 80; // Velocidad de la animación
+
+                const updateCount = () => {
+                    const current = +counter.innerText;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCount, 25);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        // Activar al hacer scroll
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                startCounters();
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.stats-grid'));
+    </script>
+
+</body>
+</html>
