@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El renacimiento de la acuarela | MEET the Blog</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --text-main: #111111;
+            --text-light: #666666;
+            --glass: rgba(255, 255, 255, 0.7);
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.8;
+        }
+
+        /* --- NAV (Consistente con las otras páginas) --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            height: 70px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; cursor: pointer; text-decoration: none; color: black; }
+
+        /* --- ARTÍCULO CONTAINER --- */
+        article {
+            max-width: 900px;
+            margin: 140px auto 100px;
+            padding: 0 20px;
+        }
+
+        /* Cabecera del post */
+        .post-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .category-tag {
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .post-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+
+        .post-meta {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-weight: 300;
+        }
+
+        /* Imagen Principal Burbuja */
+        .featured-image-container {
+            width: 100%;
+            margin-bottom: 60px;
+            border-radius: 80px; /* Súper burbuja */
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            background: #f0f0f0;
+        }
+
+        .featured-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .featured-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contenido del texto */
+        .post-content {
+            font-size: 1.15rem;
+            color: #333;
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .post-content p {
+            margin-bottom: 30px;
+        }
+
+        .post-content h2 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            margin: 50px 0 20px;
+            color: var(--text-main);
+        }
+
+        /* Blockquote Estilo Glasmorfismo */
+        blockquote {
+            margin: 50px 0;
+            padding: 40px;
+            background: #f9f9f9;
+            border-radius: 40px;
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-style: italic;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Footer del Post */
+        .post-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .author-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background: #ddd;
+        }
+
+        /* Botón Volver */
+        .back-btn {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { opacity: 0.5; transform: translateX(-5px); }
+
+        @media (max-width: 768px) {
+            .post-title { font-size: 2.5rem; }
+            .featured-image-container { border-radius: 40px; }
+            blockquote { font-size: 1.2rem; padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">ART.EXPO</a>
+        <div style="font-size: 0.8rem; font-weight: 600; letter-spacing: 1px; color: #999;">LECTURA ACTUAL</div>
+    </nav>
+
+    <article>
+        <header class="post-header">
+            <span class="category-tag">Técnica & Futuro</span>
+            <h1 class="post-title">El renacimiento de la acuarela en la era digital</h1>
+            <div class="post-meta">
+                <span>Por <strong>Elena Bloom</strong></span>
+                <span>•</span>
+                <time>20 de Marzo, 2024</time>
+                <span>•</span>
+                <span>5 min lectura</span>
+            </div>
+        </header>
+
+        <div class="featured-image-container">
+            <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=1200" alt="Detalle de acuarela">
+        </div>
+
+        <div class="post-content">
+            <p>
+                En un mundo donde la inteligencia artificial y el renderizado 3D parecen dominar cada rincón de nuestra estimulación visual, surge un fenómeno inesperado: el retorno a lo táctil, a lo imperfecto y a lo humano. La acuarela, una de las técnicas más antiguas y caprichosas, está viviendo su segunda juventud.
+            </p>
+
+            <h2>La belleza de lo impredecible</h2>
+            <p>
+                A diferencia del comando <code>Ctrl+Z</code>, la acuarela no perdona. Cada pincelada es un compromiso con el papel. Los artistas contemporáneos están encontrando en esta "falta de control" una forma de rebeldía contra la perfección clínica del arte digital. 
+            </p>
+
+            <blockquote>
+                "El agua tiene su propia voluntad; el arte consiste en aprender a negociar con ella, no en dominarla."
+            </blockquote>
+
+            <p>
+                Hoy en día, vemos cómo grandes estudios de videojuegos y animadores de nivel mundial integran texturas de acuarela real en sus flujos de trabajo digitales. No buscan replicar la técnica, sino heredar su alma. El grano del papel, la transparencia de las capas y la forma en que el pigmento se asienta en los bordes crean una conexión orgánica que el código aún lucha por imitar.
+            </p>
+
+            <h2>¿Por qué ahora?</h2>
+            <p>
+                El minimalismo y el estilo de vida <strong>"Slow Art"</strong> han impulsado a una nueva generación a valorar procesos que requieren paciencia. En nuestra galería <em>MEET the Art</em>, hemos observado un incremento del 40% en el interés por obras que muestran trazos manuales visibles. El espectador moderno busca la huella del autor.
+            </p>
+        </div>
+
+        <footer class="post-footer">
+            <div class="author-box">
+                <div class="author-img"></div>
+                <div>
+                    <p style="font-weight: 700; font-size: 0.9rem;">Elena Bloom</p>
+                    <p style="font-size: 0.75rem; color: #999;">Curadora y Artista Visual</p>
+                </div>
+            </div>
+            <a href="blog.html" class="back-btn">← Volver al blog</a>
+        </footer>
+    </article>
+
+</body>
+</html>

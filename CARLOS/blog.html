@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEET the Blog | Inspiración y Arte</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --bg-soft: #f9f9f9;
+            --text-dark: #111111;
+            --text-gray: #666666;
+            --glass-nav: rgba(255, 255, 255, 0.7);
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding-top: 120px;
+        }
+
+        /* --- NAVBAR (Mismo estilo que Galería) --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            height: 70px;
+            background: var(--glass-nav);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+        }
+
+        .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 1.4rem; cursor: pointer; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; }
+
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 60px; padding: 0 20px; }
+        header h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 12vw, 6rem); font-weight: 700; letter-spacing: -2px; }
+        header h1 span { font-style: italic; color: #bbb; font-weight: 400; }
+        header p { color: var(--text-gray); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; margin-top: 10px; }
+
+        /* --- GRID DE BLOG IRREGULAR (BURBUJAS) --- */
+        .blog-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+            column-count: 3;
+            column-gap: 35px;
+        }
+
+        @media (max-width: 1000px) { .blog-grid { column-count: 2; } }
+        @media (max-width: 650px) { .blog-grid { column-count: 1; } }
+
+        /* Estilo Burbuja del Artículo */
+        .blog-card {
+            break-inside: avoid;
+            margin-bottom: 35px;
+            background: var(--bg-soft);
+            border-radius: 50px; /* Forma de burbuja */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            border: 1px solid rgba(0,0,0,0.03);
+            text-decoration: none; /* Para que toda la tarjeta sea un link */
+            color: inherit;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.1);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 50px 50px 0 0; /* Solo arriba para encajar */
+            filter: grayscale(20%);
+            transition: 0.5s;
+        }
+
+        .blog-card:hover img { filter: grayscale(0%); }
+
+        .blog-content {
+            padding: 40px 35px;
+        }
+
+        .blog-meta {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #999;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .blog-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .blog-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Corta el texto a 3 líneas */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .read-more::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .blog-card:hover .read-more::after {
+            transform: translateX(5px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">ART.EXPO</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Galería</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Sobre mí</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>MEET <span>the</span> Blog</h1>
+        <p>Pensamientos, técnicas y visión artística</p>
+    </header>
+
+    <main class="blog-grid">
+        
+        <a href="post-detalle.html" class="blog-card">
+            <article>
+                <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=800" alt="Técnicas de acuarela moderna">
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>Técnica</span>
+                        <time datetime="2024-03-20">20 Mar 2024</time>
+                    </div>
+                    <h2 class="blog-title">El renacimiento de la acuarela en la era digital</h2>
+                    <p class="blog-excerpt">Exploramos cómo las herramientas tradicionales están recuperando su espacio en un mundo dominado por los píxeles y la IA.</p>
+                    <span class="read-more">Leer artículo</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="#" class="blog-card">
+            <article>
+                <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=800" alt="Minimalismo en el hogar">
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>Estilo de vida</span>
+                        <time datetime="2024-03-18">18 Mar 2024</time>
+                    </div>
+                    <h2 class="blog-title">Minimalismo: Menos es más en tu espacio de trabajo</h2>
+                    <p class="blog-excerpt">Cómo la organización visual de tu estudio puede potenciar tu capacidad creativa y reducir el estrés diario.</p>
+                    <span class="read-more">Leer artículo</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="#" class="blog-card">
+            <article>
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800" alt="Entrevista artista">
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>Entrevista</span>
+                        <time datetime="2024-03-15">15 Mar 2024</time>
+                    </div>
+                    <h2 class="blog-title">Conversaciones con el caos: Una charla con Iker K.</h2>
+                    <p class="blog-excerpt">Nos sentamos con el fotógrafo para entender su obsesión con las texturas oscuras y las sombras profundas.</p>
+                    <span class="read-more">Leer artículo</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="#" class="blog-card">
+            <article>
+                <img src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800" alt="Psicología del color">
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>Teoría</span>
+                        <time datetime="2024-03-10">10 Mar 2024</time>
+                    </div>
+                    <h2 class="blog-title">Psicología del color: El poder del gris elegante</h2>
+                    <p class="blog-excerpt">Por qué las marcas de lujo y los artistas contemporáneos están volviendo a la escala de grises para transmitir autoridad.</p>
+                    <span class="read-more">Leer artículo</span>
+                </div>
+            </article>
+        </a>
+
+        <a href="#" class="blog-card">
+            <article>
+                <img src="https://images.unsplash.com/photo-1515155075601-23009d0cb6d4?q=80&w=800" alt="Composición fotográfica">
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span>Fotografía</span>
+                        <time datetime="2024-03-05">05 Mar 2024</time>
+                    </div>
+                    <h2 class="blog-title">Reglas de composición que deberías romper hoy mismo</h2>
+                    <p class="blog-excerpt">La regla de los tercios es solo el principio. Aprende cuándo ignorarla para crear imágenes con verdadera fuerza visual.</p>
+                    <span class="read-more">Leer artículo</span>
+                </div>
+            </article>
+        </a>
+
+    </main>
+
+</body>
+</html>
