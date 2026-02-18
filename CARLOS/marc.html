@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Piloto | Marc Márquez - MEET MotoGP</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,900;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-white: #ffffff;
+            --text-main: #111111;
+            --text-light: #666;
+            --glass: rgba(255, 255, 255, 0.7);
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --accent-red: #ff3e3e; /* Color sutil para destacar puntos críticos */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            padding-top: 100px;
+        }
+
+        /* --- NAV (Consistente) --- */
+
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            height: 70px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px; /* Estilo píldora/burbuja */
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 2000;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover { opacity: 1; }
+
+
+
+        /* --- HERO PILOTO --- */
+        .rider-hero {
+            max-width: 1200px; margin: 0 auto; padding: 40px 20px;
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center;
+        }
+
+        .rider-photo-bubble {
+            width: 100%; aspect-ratio: 1/1;
+            background: #f4f4f4; border-radius: 100px; /* Burbuja perfecta */
+            overflow: hidden; border: 8px solid white;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+        }
+
+        .rider-photo-bubble img { width: 100%; height: 100%; object-fit: cover; }
+
+        .rider-header h1 {
+            font-family: var(--font-display); font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9; margin-bottom: 10px;
+        }
+
+        .rider-header .number {
+            font-size: 5rem; font-family: var(--font-display); font-weight: 900;
+            opacity: 0.1; position: absolute; top: -20px; right: 0;
+        }
+
+        .rider-header { position: relative; }
+
+        .current-status {
+            display: flex; gap: 20px; margin-top: 20px;
+        }
+
+        .status-pill {
+            padding: 10px 25px; border-radius: 50px;
+            background: #f0f0f0; font-size: 0.8rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- GRID DE ESTADÍSTICAS --- */
+        .stats-grid {
+            max-width: 1200px; margin: 60px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px; padding: 0 20px;
+        }
+
+        .stat-bubble {
+            background: var(--bg-white); border: 1px solid #eee;
+            border-radius: 60px; padding: 40px 20px; text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .stat-bubble:hover {
+            transform: translateY(-10px); border-color: #000;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        .stat-value {
+            font-family: var(--font-display); font-size: 3rem; font-weight: 700;
+            display: block; line-height: 1; margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light);
+        }
+
+        /* --- SECCIÓN LESIONES Y DETALLES --- */
+        .details-section {
+            max-width: 1200px; margin: 80px auto; padding: 0 20px;
+            display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px;
+        }
+
+        .detail-box {
+            background: #f9f9f9; padding: 50px; border-radius: 80px;
+        }
+
+        .detail-box h3 {
+            font-family: var(--font-display); font-size: 2rem; margin-bottom: 30px;
+        }
+
+        .injury-list { list-style: none; }
+        .injury-item {
+            padding: 20px 0; border-bottom: 1px solid #ddd;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+
+        .injury-date { font-size: 0.8rem; font-weight: 700; color: var(--accent-red); }
+
+        @media (max-width: 900px) {
+            .rider-hero, .details-section { grid-template-columns: 1fr; }
+            .rider-photo-bubble { width: 80%; margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+       <nav>
+        <div class="nav-logo">ART.EXPO</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="art.html">Galería</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section class="rider-hero">
+        <div class="rider-photo-bubble">
+            <img src="https://cdn-5.motorsport.com/images/amp/0L1yy9V2/s1000/marc-marquez-ducati-3.jpg" alt="Marc Márquez">
+        </div>
+        
+        <div class="rider-header">
+            <span class="number">93</span>
+            <p style="text-transform: uppercase; letter-spacing: 4px; font-weight: 600; font-size: 0.8rem; color: #999;">Ducati Lenovo Team</p>
+            <h1>Marc <br>Márquez</h1>
+            
+            <div class="current-status">
+                <div class="status-pill" style="background: #000; color: #fff;">Posición: 1º</div>
+                <div class="status-pill">Puntos: 425</div>
+            </div>
+            
+            <p style="margin-top: 30px; color: #666; max-width: 500px;">
+                Ocho veces campeón del mundo. Conocido como "La Hormiga", Marc ha redefinido los límites de la física en cada curva de MotoGP.
+            </p>
+        </div>
+    </section>
+
+    <div class="stats-grid">
+        <div class="stat-bubble">
+            <span class="stat-value">85</span>
+            <span class="stat-label">Victorias</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="stat-value">142</span>
+            <span class="stat-label">Podios</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="stat-value">92</span>
+            <span class="stat-label">Poles</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="stat-value">8</span>
+            <span class="stat-label">Mundiales</span>
+        </div>
+    </div>
+
+    <div class="details-section">
+        <div class="detail-box">
+            <h3>Trayectoria Reciente</h3>
+            <p>Tras su histórico paso por Honda, su adaptación a la Ducati ha sido el foco de atención del campeonato. Las estadísticas muestran un aumento en su velocidad de paso por curva del 3.2% respecto a la temporada anterior.</p>
+            <br>
+            <p>Su capacidad para salvar caídas imposibles sigue siendo su marca registrada, con un promedio de 1.4 "saves" por fin de semana de carrera.</p>
+        </div>
+
+        <div class="detail-box" style="background: #fff; border: 1px solid #eee;">
+            <h3>Historial Médico</h3>
+            <ul class="injury-list">
+                <li class="injury-item">
+                    <div>
+                        <strong>Fractura de Húmero</strong>
+                        <p style="font-size: 0.8rem; color: #888;">Jerez, GP de España</p>
+                    </div>
+                    <span class="injury-date">2020</span>
+                </li>
+                <li class="injury-item">
+                    <div>
+                        <strong>Diplopía (Visión Doble)</strong>
+                        <p style="font-size: 0.8rem; color: #888;">Entrenamiento Off-road</p>
+                    </div>
+                    <span class="injury-date">2021/22</span>
+                </li>
+                <li class="injury-item">
+                    <div>
+                        <strong>Cirugía Pulgar Derecho</strong>
+                        <p style="font-size: 0.8rem; color: #888;">Portimao</p>
+                    </div>
+                    <span class="injury-date">2023</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <footer style="text-align: center; padding: 40px; color: #ccc; font-size: 0.8rem;">
+        &copy; 2026 MEET MotoGP Stats - Data Visual Experience
+    </footer>
+
+</body>
+</html>
