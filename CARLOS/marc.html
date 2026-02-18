@@ -165,6 +165,72 @@
 
         .injury-date { font-size: 0.8rem; font-weight: 700; color: var(--accent-red); }
 
+
+/* --- GRAPH SECTION (GLASS) --- */
+        .chart-container {
+            max-width: 1200px; margin: 40px auto; padding: 40px;
+            background: linear-gradient(135deg, rgba(245,245,245,0.5) 0%, rgba(255,255,255,0.8) 100%);
+            border-radius: 60px; border: 1px solid #eee; backdrop-filter: blur(10px);
+        }
+
+        .chart-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; }
+        .chart-header h3 { font-family: var(--font-display); font-size: 2rem; }
+
+        .svg-chart { width: 100%; height: 200px; stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: draw 3s forwards ease-in-out; }
+        @keyframes draw { to { stroke-dashoffset: 0; } }
+
+        /* --- STATS GRID & COUNTERS --- */
+        .stats-grid {
+            max-width: 1200px; margin: 60px auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px; padding: 0 20px;
+        }
+
+        .stat-bubble {
+            background: #fdfdfd; border: 1px solid #f0f0f0;
+            border-radius: 50px; padding: 40px 10px; text-align: center;
+            transition: 0.4s;
+        }
+
+        .stat-bubble:hover { border-color: #000; transform: scale(1.05); }
+
+        .counter {
+            font-family: var(--font-display); font-size: 3.5rem; font-weight: 900;
+            display: block; line-height: 1; margin-bottom: 10px;
+        }
+
+        .stat-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: #999; font-weight: 700; }
+
+        /* --- SECCIÓN MAYORES DUELOS --- */
+        .duels-section { max-width: 1200px; margin: 100px auto; padding: 0 20px; }
+        .duels-section h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 40px; text-align: center; }
+
+        .duel-card {
+            display: flex; align-items: center; justify-content: space-between;
+            background: #111; color: white; border-radius: 100px;
+            padding: 15px 40px; margin-bottom: 20px;
+            transition: 0.3s; cursor: crosshair;
+        }
+
+        .duel-card:hover { transform: scale(1.02); background: #000; }
+
+        .duel-info { text-align: center; }
+        .duel-info span { display: block; font-size: 0.7rem; text-transform: uppercase; opacity: 0.6; }
+        .duel-info strong { font-family: var(--font-display); font-size: 1.4rem; }
+
+        .pilot-vs { display: flex; align-items: center; gap: 20px; font-weight: 700; font-size: 1.1rem; }
+        .vs-circle {
+            width: 40px; height: 40px; border: 1px solid #444;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .duel-card { flex-direction: column; border-radius: 40px; padding: 30px; gap: 20px; }
+        }
+
+
+
         @media (max-width: 900px) {
             .rider-hero, .details-section { grid-template-columns: 1fr; }
             .rider-photo-bubble { width: 80%; margin: 0 auto; }
@@ -257,6 +323,85 @@
             </ul>
         </div>
     </div>
+
+
+    <div class="chart-container">
+        <div class="chart-header">
+            <div>
+                <h3 style="margin:0;">Progresión de Puntos</h3>
+                <p style="font-size: 0.8rem; color: #888;">Temporada Actual - Top 10 Carreras</p>
+            </div>
+            <div style="text-align:right">
+                <span style="font-size: 1.5rem; font-weight: 700;">+12%</span>
+                <p style="font-size: 0.6rem; color: green;">vs last season</p>
+            </div>
+        </div>
+        <svg class="svg-chart" viewBox="0 0 1000 150">
+            <path d="M0,130 Q100,120 200,90 T400,100 T600,40 T800,50 T1000,10" 
+                  fill="none" stroke="black" stroke-width="4" />
+            <circle cx="1000" cy="10" r="6" fill="black" />
+        </svg>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-bubble">
+            <span class="counter" data-target="85">0</span>
+            <span class="stat-label">Victorias</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="425">0</span>
+            <span class="stat-label">Puntos 2026</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="1142">0</span>
+            <span class="stat-label">Vueltas Líder</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="142">0</span>
+            <span class="stat-label">Podios Totales</span>
+        </div>
+        <div class="stat-bubble">
+            <span class="counter" data-target="8">0</span>
+            <span class="stat-label">Mundiales</span>
+        </div>
+    </div>
+
+    <section class="duels-section">
+        <h2>Mayores Duelos</h2>
+        
+        <div class="duel-card">
+            <div class="pilot-vs">
+                M. MÁRQUEZ <div class="vs-circle">VS</div> Pecco Bagnaia
+            </div>
+            <div class="duel-info">
+                <span>Circuito</span>
+                <strong>Mugello, Italia</strong>
+            </div>
+            <div style="font-weight: 800; color: #ff3e3e;">+0.042s</div>
+        </div>
+
+        <div class="duel-card">
+            <div class="pilot-vs">
+                M. MÁRQUEZ <div class="vs-circle">VS</div> Jorge Martín
+            </div>
+            <div class="duel-info">
+                <span>Circuito</span>
+                <strong>Sachsenring</strong>
+            </div>
+            <div style="font-weight: 800; color: #ff3e3e;">Lucha P1</div>
+        </div>
+
+        <div class="duel-card">
+            <div class="pilot-vs">
+                M. MÁRQUEZ <div class="vs-circle">VS</div> Pedro Acosta
+            </div>
+            <div class="duel-info">
+                <span>Circuito</span>
+                <strong>COTA, Austin</strong>
+            </div>
+            <div style="font-weight: 800; color: #ff3e3e;">Última Vuelta</div>
+        </div>
+    </section>
 
     <footer style="text-align: center; padding: 40px; color: #ccc; font-size: 0.8rem;">
         &copy; 2026 MEET MotoGP Stats - Data Visual Experience
